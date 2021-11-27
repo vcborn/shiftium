@@ -30,3 +30,4 @@ FIREBASE_ADMIN_PRIVATE_KEY=
 * It will not be allowed to leave work after 24:00
 * Slow login process
 * Can't press leave button
+* Sometimes cause 500 error
