@@ -1,3 +1,7 @@
+<h3 align="center">
+  <img src="https://user-images.githubusercontent.com/39876629/143676769-30164064-157b-4da7-92f5-00a0eb888c5f.png" height=100 />
+</h3>
+
 # Shiftium
 
 Shiftium is a simple and easy attendance management tool.
@@ -21,3 +25,9 @@ FIREBASE_ADMIN_PROJECT_ID=
 FIREBASE_ADMIN_CLIENT_EMAIL=
 FIREBASE_ADMIN_PRIVATE_KEY=
 ```
+
+## Known issues..
+* It will not be allowed to leave work after 24:00
+* Slow login process
+* Can't press leave button
+* Sometimes cause 500 error
