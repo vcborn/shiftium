@@ -29,4 +29,4 @@ FIREBASE_ADMIN_PRIVATE_KEY=
 ## Known issues..
 * It will not be allowed to leave work after 24:00
 * Slow login process
-* Multiple templates will be generated
+* 
