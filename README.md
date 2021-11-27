@@ -1,6 +1,6 @@
-<h1 align="center">
+<h3 align="center">
   <img src="https://user-images.githubusercontent.com/39876629/143676769-30164064-157b-4da7-92f5-00a0eb888c5f.png" height=100 />
-</h1>
+</h3>
 
 # Shiftium
 
