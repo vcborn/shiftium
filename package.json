@@ -1,6 +1,10 @@
 {
   "name": "shiftium",
-  "private": true,
+  "version": "0.1.0",
+  "description": "Shiftium is a simple and easy attendance management tool.",
+  "repository": "https://github.com/vcborn/shiftium",
+  "author": "wamo <ainznino@pm.me>",
+  "license": "Apache-2.0",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
