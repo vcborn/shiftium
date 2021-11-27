@@ -32,6 +32,11 @@ FIREBASE_ADMIN_CLIENT_EMAIL=
 FIREBASE_ADMIN_PRIVATE_KEY=
 ```
 
+And you need to create discord webhook, then replace `src/pages/dashboard.tsx` lines 162:
+```js
+const hookUrl = "Your Discord Webhook URL";
+```
+
 ## Known issues..
 * It will not be allowed to leave work after 24:00
 * Slow login process
