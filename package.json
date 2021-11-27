@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@heroicons/react": "^1.0.5",
+    "axios": "^0.24.0",
     "firebase": "^9.5.0",
     "firebase-admin": "^10.0.0",
     "moment": "^2.29.1",

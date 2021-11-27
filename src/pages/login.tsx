@@ -5,7 +5,7 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import Head from "next/head";
 
-import { login } from "../lib/utils"; // 上記で実装したファイル
+import { login } from "../lib/utils";
 
 const LoginPage: NextPage = () => {
   const router = useRouter();
@@ -13,13 +13,18 @@ const LoginPage: NextPage = () => {
   const [password, setPassword] = useState("");
 
   const onSubmit = async (event: FormEvent) => {
-    event.preventDefault(); // デフォルトの<form />の挙動を無効にする
-    await login(email, password); // email・passwordを使ってログイン
-    router.push("/dashboard"); // ダッシュボードページへ遷移させる
+    event.preventDefault();
+    await login("password", email, password);
+    router.push("/dashboard");
+  };
+
+  const loginWithGoogle = async () => {
+    await login("google");
+    router.push("/dashboard");
   };
 
   return (
-    <div className="bg-gray-100 h-screen">
+    <div className="bg-gray-100 min-h-screen">
       <Head>
         <title>Login | Shiftium</title>
       </Head>
@@ -68,6 +73,15 @@ const LoginPage: NextPage = () => {
               </button>
             </div>
           </form>
+          <div className="text-center mt-5">
+            <button
+              type="submit"
+              className="border-gray-200 rounded-md shadow-md px-4 py-1.5 duration-200 hover:opacity-70"
+              onClick={loginWithGoogle}
+            >
+              Googleでログイン
+            </button>
+          </div>
         </div>
       </div>
     </div>

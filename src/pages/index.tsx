@@ -4,7 +4,7 @@ import Link from "next/link";
 
 const Home: NextPage = () => {
   return (
-    <div className="bg-gray-100 h-screen">
+    <div className="bg-gray-100 min-h-screen">
       <Head>
         <title>Welcome | Shiftium</title>
       </Head>

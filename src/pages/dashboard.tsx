@@ -1,8 +1,8 @@
 import type { GetServerSideProps, NextPage } from "next";
 
 import nookies from "nookies";
-import { useRouter } from "next/router";
-import React from "react";
+import Router, { useRouter } from "next/router";
+import React, { useState, useEffect } from "react";
 import Clock from "react-live-clock";
 import { BriefcaseIcon, ClockIcon, LogoutIcon } from "@heroicons/react/solid";
 import Head from "next/head";
@@ -19,6 +19,8 @@ import {
   updateDoc,
   query,
 } from "firebase/firestore";
+import axios from "axios";
+import { send } from "process";
 
 const formatDate = (dt: Date) => {
   var y = dt.getFullYear();
@@ -27,7 +29,16 @@ const formatDate = (dt: Date) => {
   return y + "-" + m + "-" + d;
 };
 
-const DashboardPage: NextPage<{ uid: string }> = ({ uid }) => {
+export type timeList = {
+  date: string;
+  startTime: string;
+  endTime: string;
+};
+
+const DashboardPage: NextPage<{ uid: string; email: string }> = ({
+  uid,
+  email,
+}) => {
   const router = useRouter();
 
   const firebaseApp = initializeApp(firebaseConfig);
@@ -66,13 +77,21 @@ const DashboardPage: NextPage<{ uid: string }> = ({ uid }) => {
   const setData = () => {
     getData().then((result) => {
       if (process.browser) {
-        document.getElementById("startTime")!.textContent = result.startTime;
-        document.getElementById("endTime")!.textContent = result.endTime;
+        if (document.getElementById("startTime")) {
+          document.getElementById("startTime")!.textContent = result.startTime;
+        }
+        if (document.getElementById("endTime")) {
+          document.getElementById("endTime")!.textContent = result.endTime;
+        }
         if (
           document.getElementById("startTime")?.textContent !== "HH時mm分dd秒"
         ) {
           document
             .getElementById("startButton")
+            ?.setAttribute("disabled", "true");
+        } else {
+          document
+            .getElementById("endButton")
             ?.setAttribute("disabled", "true");
         }
         if (
@@ -92,7 +111,10 @@ const DashboardPage: NextPage<{ uid: string }> = ({ uid }) => {
     await updateDoc(doc(subCol, "1"), {
       startTime: time,
     });
-    document.getElementById("startButton")?.setAttribute("disabled", "true");
+    if (process.browser) {
+      document.getElementById("startButton")?.setAttribute("disabled", "true");
+      document.getElementById("endButton")?.setAttribute("disabled", "false");
+    }
     setData();
   };
 
@@ -110,10 +132,12 @@ const DashboardPage: NextPage<{ uid: string }> = ({ uid }) => {
 
   setData();
 
-  const getAllData = async () => {
+  const [timeListData, setAllData] = useState<timeList[]>([]);
+
+  const GetAllData = async () => {
     let i = 0;
     let s = 0;
-    let allData = [];
+    let allData: timeList[] = [];
     while (i <= 30) {
       let dt = new Date();
       let minus = dt.setDate(dt.getDate() - i);
@@ -131,28 +155,30 @@ const DashboardPage: NextPage<{ uid: string }> = ({ uid }) => {
       i++;
     }
 
-    if (process.browser) {
-      if ("content" in document.createElement("template")) {
-        const template = document.getElementById("dataList");
-        const fragment = document.createDocumentFragment();
-        for (let i = 0; i < allData.length; i++) {
-          var clone = document.importNode(template!.content, true);
-          clone.querySelector("#date").textContent = allData[i]["date"];
-          clone.querySelector("#start").textContent = allData[i]["startTime"];
-          clone.querySelector("#end").textContent = allData[i]["endTime"];
-          fragment.appendChild(clone);
-        }
-        document.getElementById("list")!.appendChild(fragment);
-      } else {
-        console.log("template要素に対応していません。");
-      }
-    }
+    setAllData(allData);
   };
 
-  getAllData();
+  const send2Discord = async (status: string) => {
+    const hookUrl = "Your Discord Webhook URL";
+    const config = {
+      headers: {
+        Accept: "application/json",
+        "Content-type": "application/json",
+      },
+    };
+    const postData = {
+      username: "出退勤管理",
+      content: email + "さんが" + status + "しました！",
+    };
+    const res = await axios.post(hookUrl, postData, config);
+  };
+
+  useEffect(() => {
+    GetAllData();
+  }, []);
 
   return (
-    <div className="bg-gray-100 h-full pb-20">
+    <div className="bg-gray-100 min-h-screen pb-20">
       <Head>
         <title>Dashboard | Shiftium</title>
       </Head>
@@ -192,7 +218,14 @@ const DashboardPage: NextPage<{ uid: string }> = ({ uid }) => {
             <div className="grid grid-cols-2 gap-4 w-full text-xl mb-10">
               <button
                 className="h-32 bg-green-600 duration-200 hover:bg-green-800 disabled:bg-green-800 text-white rounded-lg flex items-center justify-center"
-                onClick={setStartTime}
+                onClick={() => {
+                  {
+                    setStartTime();
+                  }
+                  {
+                    send2Discord("出勤");
+                  }
+                }}
                 id="startButton"
               >
                 <BriefcaseIcon className="inline-block w-6" />
@@ -200,7 +233,14 @@ const DashboardPage: NextPage<{ uid: string }> = ({ uid }) => {
               </button>
               <button
                 className="h-32 bg-red-500 duration-200 hover:bg-red-700 disabled:bg-red-700 text-white rounded-lg flex items-center justify-center"
-                onClick={setEndTime}
+                onClick={() => {
+                  {
+                    setEndTime();
+                  }
+                  {
+                    send2Discord("退勤");
+                  }
+                }}
                 id="endButton"
               >
                 退勤
@@ -210,19 +250,20 @@ const DashboardPage: NextPage<{ uid: string }> = ({ uid }) => {
         </div>
         <div className="mt-10 px-8 py-5 bg-white rounded-lg">
           <h2 className="text-2xl font-bold mb-3">直近30日の記録</h2>
-          <div id="list"></div>
-          <template id="dataList">
-            <div className="mt-5">
-              <h4 className="font-bold text-lg" id="date"></h4>
-              <p>
-                出勤時刻：<span id="start"></span>
-              </p>
-              <p>
-                退勤時刻：<span id="end"></span>
-              </p>
-              <hr className="mt-3" />
-            </div>
-          </template>
+          <div id="list">
+            {timeListData.map(({ date, startTime, endTime }) => (
+              <div className="mt-5" key={date}>
+                <h4 className="font-bold text-lg">{date}</h4>
+                <p>
+                  出勤時刻：<span>{startTime}</span>
+                </p>
+                <p>
+                  退勤時刻：<span>{endTime}</span>
+                </p>
+                <hr className="mt-3" />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>
@@ -252,6 +293,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   return {
     props: {
       uid: user.uid,
+      email: user.email,
     },
   };
 };

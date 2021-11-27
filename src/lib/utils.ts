@@ -2,7 +2,12 @@ import type { FirebaseApp } from 'firebase/app'
 import type { Auth as FirebaseAuth } from 'firebase/auth'
 
 import { getApps, initializeApp } from 'firebase/app'
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  GoogleAuthProvider,
+  signInWithPopup,
+} from 'firebase/auth'
 import { getFirestore } from 'firebase/firestore'
 
 /**
@@ -37,15 +42,29 @@ export const getFirebaseAuth = (): FirebaseAuth => {
 /**
  * @description メールアドレスとパスワードでログイン
  */
-export const login = async (email: string, password: string) => {
+export const login = async (
+  type: string,
+  email: string = '',
+  password: string = '',
+) => {
   // FirebaseAuthを取得する
   const auth = getFirebaseAuth()
 
-  // メールアドレスとパスワードでログインする
-  const result = await signInWithEmailAndPassword(auth, email, password)
+  let result = null
+
+  if (type == 'password') {
+    console.log('Good Password')
+    // メールアドレスとパスワードでログインする
+    result = await signInWithEmailAndPassword(auth, email, password)
+  } else if (type == 'google') {
+    console.log('Good Google')
+    const provider = new GoogleAuthProvider()
+    result = await signInWithPopup(auth, provider)
+  }
 
   // セッションIDを作成するためのIDを作成する
-  const id = await result.user.getIdToken()
+  const id = await result!.user.getIdToken()
+  console.log('Generated')
 
   // Cookieにセッションを付与するようにAPIを投げる
   await fetch('/api/session', { method: 'POST', body: JSON.stringify({ id }) })
