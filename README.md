@@ -6,6 +6,12 @@
 
 Shiftium is a simple and easy attendance management tool.
 
+## Features
+* Email + Pass / Google Login
+* View history to 30 days
+* Simple UI
+* Auto send to discord ( with webhook )
+
 ## Getting Started
 
 You know how to setup this, right?
