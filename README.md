@@ -30,7 +30,7 @@ This program uses Firebase Auth and Firestore.
 
 You know how to setup this, right?
 
-But this tool using firebase, and you might not be know variables of .env file.
+But this tool using firebase, and you might not be know variables of .env file.  
 If you don't know that, setup .env.local like this:
 
 ```
