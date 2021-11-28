@@ -72,9 +72,13 @@ const modifyAdmin = (uid, isAdmin) => {
 Deploy it and create a Firestore document at `admin_users/{AUTOID}/`.  
 The field must contains `uid`, the value must contains someone's uid that you want to make an administrator.
 
-## Known issues..
+## Known issues
 
 - It will not be allowed to leave work after 24:00
 - Slow login process
 - Can't press leave button
 - Sometimes cause 500 error
+
+## Upcoming features
+
+- i18n support
