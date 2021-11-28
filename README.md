@@ -6,6 +6,12 @@
 
 Shiftium is a simple and easy attendance management tool.
 
+## Features
+* Email + Pass / Google Login
+* View history to 30 days
+* Simple UI
+* Auto send to discord ( with webhook )
+
 ## Getting Started
 
 You know how to setup this, right?
@@ -25,6 +31,11 @@ DISCORD_WEBHOOK_URL=
 FIREBASE_ADMIN_PROJECT_ID=
 FIREBASE_ADMIN_CLIENT_EMAIL=
 FIREBASE_ADMIN_PRIVATE_KEY=
+```
+
+And you need to create discord webhook, then replace `src/pages/dashboard.tsx` lines 162:
+```js
+const hookUrl = "Your Discord Webhook URL";
 ```
 
 ## Known issues..
