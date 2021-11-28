@@ -4,7 +4,12 @@ import nookies from "nookies";
 import Router, { useRouter } from "next/router";
 import React, { useState, useEffect } from "react";
 import Clock from "react-live-clock";
-import { BriefcaseIcon, ClockIcon, LogoutIcon } from "@heroicons/react/solid";
+import {
+  DownloadIcon,
+  BriefcaseIcon,
+  ClockIcon,
+  LogoutIcon,
+} from "@heroicons/react/solid";
 import Head from "next/head";
 
 import { firebaseConfig, logout } from "../lib/utils";
@@ -21,6 +26,7 @@ import {
 } from "firebase/firestore";
 import axios from "axios";
 import { send } from "process";
+import { CSVLink } from "react-csv";
 
 const formatDate = (dt: Date) => {
   var y = dt.getFullYear();
@@ -159,7 +165,7 @@ const DashboardPage: NextPage<{ uid: string; email: string }> = ({
   };
 
   const send2Discord = async (status: string) => {
-    const hookUrl = "Your Discord Webhook URL";
+    const hookUrl = process.env.DISCORD_WEBHOOK_URL || "";
     const config = {
       headers: {
         Accept: "application/json",
@@ -243,6 +249,7 @@ const DashboardPage: NextPage<{ uid: string; email: string }> = ({
                 }}
                 id="endButton"
               >
+                <LogoutIcon className="inline-block w-6" />
                 退勤
               </button>
             </div>
@@ -250,6 +257,12 @@ const DashboardPage: NextPage<{ uid: string; email: string }> = ({
         </div>
         <div className="mt-10 px-8 py-5 bg-white rounded-lg">
           <h2 className="text-2xl font-bold mb-3">直近30日の記録</h2>
+          <CSVLink
+            data={timeListData}
+            className="bg-blue-900 inline-block h-10 w-10 rounded-full duration-200 hover:opacity-70 shadow-md"
+          >
+            <DownloadIcon className="rounded-full text-white p-2" />
+          </CSVLink>
           <div id="list">
             {timeListData.map(({ date, startTime, endTime }) => (
               <div className="mt-5" key={date}>

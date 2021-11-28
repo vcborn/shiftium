@@ -21,13 +21,15 @@ NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=
 NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=
 NEXT_PUBLIC_FIREBASE_APP_ID=
 
+DISCORD_WEBHOOK_URL=
 FIREBASE_ADMIN_PROJECT_ID=
 FIREBASE_ADMIN_CLIENT_EMAIL=
 FIREBASE_ADMIN_PRIVATE_KEY=
 ```
 
 ## Known issues..
-* It will not be allowed to leave work after 24:00
-* Slow login process
-* Can't press leave button
-* Sometimes cause 500 error
+
+- It will not be allowed to leave work after 24:00
+- Slow login process
+- Can't press leave button
+- Sometimes cause 500 error
