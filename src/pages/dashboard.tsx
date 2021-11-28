@@ -9,6 +9,7 @@ import {
   BriefcaseIcon,
   ClockIcon,
   LogoutIcon,
+  LibraryIcon,
 } from "@heroicons/react/solid";
 import Head from "next/head";
 
@@ -177,6 +178,10 @@ const DashboardPage: NextPage<{ uid: string; email: string }> = ({
     const res = await axios.post(hookUrl, postData, config);
   };
 
+  const showAdmin = () => {
+    router.push("/admin/");
+  };
+
   useEffect(() => {
     GetAllData();
   }, []);
@@ -189,9 +194,14 @@ const DashboardPage: NextPage<{ uid: string; email: string }> = ({
       <header className="bg-blue-900 text-white py-5">
         <div className="mx-5 flex justify-between flex-wrap">
           <h1 className="text-xl">Shiftium</h1>
-          <button onClick={onLogout}>
-            <LogoutIcon className="duration-200 inline-block w-6 hover:opacity-70" />
-          </button>
+          <div>
+            <button onClick={showAdmin}>
+              <LibraryIcon className="duration-200 inline-block w-6 hover:opacity-70 mr-3" />
+            </button>
+            <button onClick={onLogout}>
+              <LogoutIcon className="duration-200 inline-block w-6 hover:opacity-70" />
+            </button>
+          </div>
         </div>
       </header>
 

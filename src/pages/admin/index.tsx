@@ -3,7 +3,11 @@ import type { GetServerSideProps, NextPage } from "next";
 import nookies from "nookies";
 import Router, { useRouter } from "next/router";
 import React, { useState, useEffect } from "react";
-import { DownloadIcon, LogoutIcon } from "@heroicons/react/solid";
+import {
+  DownloadIcon,
+  LogoutIcon,
+  UserCircleIcon,
+} from "@heroicons/react/solid";
 import Head from "next/head";
 
 import { firebaseConfig, logout } from "../../lib/utils";
@@ -85,6 +89,10 @@ const AdminPage: NextPage<{ user: "" }> = ({ user }) => {
     GetAllData();
   };
 
+  const showMain = () => {
+    router.push("/dashboard");
+  };
+
   return (
     <div className="bg-gray-100 min-h-screen pb-20">
       <Head>
@@ -93,9 +101,14 @@ const AdminPage: NextPage<{ user: "" }> = ({ user }) => {
       <header className="bg-blue-900 text-white py-5">
         <div className="mx-5 flex justify-between flex-wrap">
           <h1 className="text-xl">Shiftium</h1>
-          <button onClick={onLogout}>
-            <LogoutIcon className="duration-200 inline-block w-6 hover:opacity-70" />
-          </button>
+          <div>
+            <button onClick={showMain}>
+              <UserCircleIcon className="duration-200 inline-block w-6 hover:opacity-70 mr-3" />
+            </button>
+            <button onClick={onLogout}>
+              <LogoutIcon className="duration-200 inline-block w-6 hover:opacity-70" />
+            </button>
+          </div>
         </div>
       </header>
 
@@ -181,6 +194,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     };
   }
 
+  const firebaseApp = initializeApp(firebaseConfig);
   const auth = getAuth();
   onAuthStateChanged(auth, (user) => {
     if (user) {

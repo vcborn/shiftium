@@ -1,6 +1,8 @@
 import type { FormEvent } from "react";
+import nookies from "nookies";
+import { firebaseAdmin } from "../lib/firebaseAdmin";
 
-import { NextPage } from "next";
+import { GetServerSideProps, NextPage } from "next";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import Head from "next/head";
@@ -86,6 +88,29 @@ const LoginPage: NextPage = () => {
       </div>
     </div>
   );
+};
+
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const cookies = nookies.get(ctx);
+  const session = cookies.session || "";
+
+  const user = await firebaseAdmin
+    .auth()
+    .verifySessionCookie(session, true)
+    .catch(() => null);
+
+  if (user) {
+    return {
+      redirect: {
+        destination: "/dashboard",
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {},
+  };
 };
 
 export default LoginPage;
