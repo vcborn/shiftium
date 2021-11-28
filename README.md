@@ -40,7 +40,6 @@ FIREBASE_ADMIN_PRIVATE_KEY=
 
 ### Admin panel
 To use admin panel, you must create some cloud functions.  
-Fist, create function.
 ```js
 const functions = require("firebase-functions");
 const admin = require("firebase-admin");
