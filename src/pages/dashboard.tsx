@@ -25,7 +25,6 @@ import {
   query,
 } from "firebase/firestore";
 import axios from "axios";
-import { send } from "process";
 import { CSVLink } from "react-csv";
 
 const formatDate = (dt: Date) => {
@@ -142,7 +141,6 @@ const DashboardPage: NextPage<{ uid: string; email: string }> = ({
 
   const GetAllData = async () => {
     let i = 0;
-    let s = 0;
     let allData: timeList[] = [];
     while (i <= 30) {
       let dt = new Date();
