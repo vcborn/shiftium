@@ -2,6 +2,15 @@
   <img src="https://user-images.githubusercontent.com/39876629/143676769-30164064-157b-4da7-92f5-00a0eb888c5f.png" height=100 />
 </h3>
 
+<table>
+<tbody>
+  <tr>
+    <td><a href="https://github.com/vcborn/shiftium/blob/main/README.md">English</a></td>
+    <td><a href="https://github.com/vcborn/shiftium/blob/main/README_jp.md">日本語</a></td>
+  </tr>
+  </tbody>
+</table>
+
 # Shiftium
 
 Shiftiumはシンプルで簡単な勤怠管理ツールです。
