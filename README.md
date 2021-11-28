@@ -6,6 +6,8 @@
 
 Shiftium is a simple and easy attendance management tool.
 
+This program uses Firebase Auth and Firestore.
+
 ## Features
 
 - Email + Pass / Google Login
@@ -13,7 +15,7 @@ Shiftium is a simple and easy attendance management tool.
   - Download with csv
 - Simple UI
 - Auto send to discord ( with webhook )
-- Admin Panel
+- Admin panel
 
 ## Getting Started
 
@@ -35,6 +37,41 @@ FIREBASE_ADMIN_PROJECT_ID=
 FIREBASE_ADMIN_CLIENT_EMAIL=
 FIREBASE_ADMIN_PRIVATE_KEY=
 ```
+
+### Admin panel
+To use admin panel, you must create some cloud functions.  
+Fist, create function.
+```js
+const functions = require("firebase-functions");
+const admin = require("firebase-admin");
+admin.initializeApp(functions.config().firebase);
+
+exports.addAdminClaim = functions.firestore
+  .document("admin_users/{docID}")
+  .onCreate((snap) => {
+    const newAdminUser = snap.data();
+    if (newAdminUser === undefined) {
+      return;
+    }
+    modifyAdmin(newAdminUser.uid, true);
+  });
+
+exports.removeAdminClaim = functions.firestore
+  .document("admin_users/{docID}")
+  .onDelete((snap) => {
+    const deletedAdminUser = snap.data();
+    if (deletedAdminUser === undefined) {
+      return;
+    }
+    modifyAdmin(deletedAdminUser.uid, false);
+  });
+
+const modifyAdmin = (uid, isAdmin) => {
+  admin.auth().setCustomUserClaims(uid, { admin: isAdmin }).then();
+};
+```
+Deploy it and create a Firestore document at `admin_users/{AUTOID}/`.  
+The field must contains `uid`, the value must contains someone's uid that you want to make an administrator.
 
 ## Known issues..
 
