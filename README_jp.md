@@ -78,7 +78,7 @@ const modifyAdmin = (uid, isAdmin) => {
   admin.auth().setCustomUserClaims(uid, { admin: isAdmin }).then();
 };
 ```
-これをデプロイし、`admin_users/{AUTOID}/`にドキュメントを作成してください。（{AUTOID}は自動IDで作成）
+これをデプロイし、`admin_users/{AUTOID}/`にドキュメントを作成してください。（{AUTOID}は自動IDで作成）  
 フィールドは`uid`、値は管理者にしたい誰かのuidを入れてください。
 
 ## 既知の問題
