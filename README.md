@@ -13,6 +13,7 @@ Shiftium is a simple and easy attendance management tool.
   - Download with csv
 - Simple UI
 - Auto send to discord ( with webhook )
+- Admin Panel
 
 ## Getting Started
 
