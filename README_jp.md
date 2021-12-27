@@ -91,3 +91,5 @@ const modifyAdmin = (uid, isAdmin) => {
 ## 追加予定の機能
 
 - i18n サポート
+- カレンダー表示
+- ダークモード切替
