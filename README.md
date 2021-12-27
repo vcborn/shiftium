@@ -91,3 +91,4 @@ The field must contains `uid`, the value must contains someone's uid that you wa
 ## Upcoming features
 
 - i18n support
+- Calendar view
