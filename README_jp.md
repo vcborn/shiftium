@@ -13,25 +13,25 @@
 
 # Shiftium
 
-Shiftium is a simple and easy attendance management tool.
+Shiftiumはシンプルで簡単な勤怠管理ツールです。
 
-This program uses Firebase Auth and Firestore.
+このプログラムはFirebase AuthとFirestoreを使用しています。
 
-## Features
+## 機能
 
-- Email + Pass / Google Login
-- View history to 30 days
-  - Download with csv
-- Simple UI
-- Auto send to discord ( with webhook )
-- Admin panel
+- メール + パスワード / Google ログイン
+- 30日前までの履歴を確認
+  - CSVでダウンロード
+- シンプルなUI
+- 自動でDiscordに送信 ( webhook )
+- 管理画面
 
-## Getting Started
+## はじめに
 
-You know how to setup this, right?
+これのセットアップの仕方は知っていますよね？
 
-But this tool using firebase, and you might not be know variables of .env file.  
-If you don't know that, setup .env.local like this:
+ただ、このツールはFirebaseを使っていて、あなたは`.env`ファイルの変数名を知らないかもしれません。  
+もし知らなければ、`.env.local`ファイルをこのように設定してください。
 
 ```
 NEXT_PUBLIC_FIREBASE_API_KEY=
@@ -47,8 +47,8 @@ FIREBASE_ADMIN_CLIENT_EMAIL=
 FIREBASE_ADMIN_PRIVATE_KEY=
 ```
 
-### Admin panel
-To use admin panel, you must create some cloud functions.  
+### 管理画面
+管理画面を使用するには、Cloud Functionsを作成する必要があります。
 ```js
 const functions = require("firebase-functions");
 const admin = require("firebase-admin");
@@ -78,18 +78,18 @@ const modifyAdmin = (uid, isAdmin) => {
   admin.auth().setCustomUserClaims(uid, { admin: isAdmin }).then();
 };
 ```
-Deploy it and create a Firestore document at `admin_users/{AUTOID}/`.  
-The field must contains `uid`, the value must contains someone's uid that you want to make an administrator.
+これをデプロイし、`admin_users/{AUTOID}/`にドキュメントを作成してください。（{AUTOID}は自動IDで作成）  
+フィールドは`uid`、値は管理者にしたい誰かのuidを入れてください。
 
-## Known issues
+## 既知の問題
 
-- It will not be allowed to leave work after 24:00
-- Slow login process
-- Can't press leave button
-- Sometimes cause 500 error
+- 24:00以降の退勤ができない
+- ログインが遅い
+- 退勤ボタンが押せない
+- 500エラーがたまにでる
 
-## Upcoming features
+## 追加予定の機能
 
-- i18n support
-- Calendar view
-- Darkmode support
+- i18n サポート
+- カレンダー表示
+- ダークモード切替
