@@ -3084,10 +3084,10 @@ react-is@^16.8.1:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
   integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
 
-react-live-clock@^5.5.1:
-  version "5.5.1"
-  resolved "https://registry.yarnpkg.com/react-live-clock/-/react-live-clock-5.5.1.tgz#95ac9011d2b925d1de72bb5b3a76339e8265a8d8"
-  integrity sha512-PhS8NsmRhhEs6nXrP4aqp44DVka9xVzLuA+yUXVJNFm4kT7u0Q64e4lYpMJFryyvHKKYajNhmdTYheevZO8pGQ==
+react-live-clock@^5.6.0:
+  version "5.6.0"
+  resolved "https://registry.yarnpkg.com/react-live-clock/-/react-live-clock-5.6.0.tgz#498cb6cfea34a9b6d7b9a20aef85eef1948a6250"
+  integrity sha512-fNHx6/VsHjI0Wf9nCWFKSmBXh+97aNXbCQ0WXbBqE0Lr/rywsV8DGL+qKlRqZX5pbAGsHbGk7urKYLOkippB/Q==
 
 react-moment@^1.1.1:
   version "1.1.1"
