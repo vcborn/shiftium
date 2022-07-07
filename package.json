@@ -16,7 +16,7 @@
     "axios": "^0.27.2",
     "firebase": "^9.8.4",
     "firebase-admin": "^11.0.0",
-    "moment": "^2.29.3",
+    "moment": "^2.29.4",
     "moment-timezone": "^0.5.34",
     "next": "12.2.0",
     "nookies": "^2.5.2",
