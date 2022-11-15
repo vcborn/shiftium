@@ -17,7 +17,7 @@
     "firebase": "^9.13.0",
     "firebase-admin": "^11.2.1",
     "moment": "^2.29.4",
-    "moment-timezone": "^0.5.38",
+    "moment-timezone": "^0.5.39",
     "next": "12.3.1",
     "nookies": "^2.5.2",
     "react": "17.0.2",
