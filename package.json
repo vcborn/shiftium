@@ -15,7 +15,7 @@
     "@heroicons/react": "^2.0.18",
     "axios": "^1.4.0",
     "firebase": "^9.22.1",
-    "firebase-admin": "^11.8.0",
+    "firebase-admin": "^11.9.0",
     "moment": "^2.29.4",
     "moment-timezone": "^0.5.43",
     "next": "13.4.4",
