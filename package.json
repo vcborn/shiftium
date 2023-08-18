@@ -14,7 +14,7 @@
   "dependencies": {
     "@heroicons/react": "^2.0.18",
     "axios": "^1.4.0",
-    "firebase": "^10.1.0",
+    "firebase": "^10.2.0",
     "firebase-admin": "^11.10.1",
     "moment": "^2.29.4",
     "moment-timezone": "^0.5.43",
