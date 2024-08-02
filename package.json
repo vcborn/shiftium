@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "@heroicons/react": "^2.1.5",
-    "axios": "^1.7.2",
+    "axios": "^1.7.3",
     "firebase": "^10.12.4",
     "firebase-admin": "^12.3.0",
     "moment": "^2.30.1",
